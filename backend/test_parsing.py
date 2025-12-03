@@ -4,30 +4,30 @@ from parsing import parse_text, generate_pairs, normalize_phone_digits
 def test_normalize_phone():
     """Testa normalização de telefones"""
     # Teste 1: telefone com DDD + número (11 dígitos)
-    result = normalize_phone_digits('53 98121-2594')
-    assert result == '5553981212594'
+    result = normalize_phone_digits('11 91234-5678')
+    assert result == '5511912345678'
 
     # Teste 2: telefone com código de país no início
-    assert normalize_phone_digits('5553981212594') == '5553981212594'
+    assert normalize_phone_digits('5511912345678') == '5511912345678'
 
     # Teste 3: telefone curto (apenas dígitos)
-    result = normalize_phone_digits('98121-2594')
+    result = normalize_phone_digits('91234-5678')
     assert result.startswith('55')
 
     print("✓ Testes de normalização passou")
 
 def test_parse_basic():
     """Testa parsing básico"""
-    text = """Amigo Secreto - Quarta Parede
-Mírian Valério\t53 98121-2594
-Kateline Fonseca\t53 99160-3120
-Anna Zimmermann\t53 99174-9229"""
+    text = """Amigo Secreto - Empresa XYZ
+João Silva\t11 91234-5678
+Maria Santos\t21 98765-4321
+Pedro Oliveira\t31 99876-5432"""
 
     result = parse_text(text, '55')
 
-    assert result['group_name'] == 'Amigo Secreto - Quarta Parede'
+    assert result['group_name'] == 'Amigo Secreto - Empresa XYZ'
     assert len(result['participants']) == 3
-    assert result['participants'][0]['name'] == 'Mírian Valério'
+    assert result['participants'][0]['name'] == 'João Silva'
     assert result['participants'][0]['is_phone_valid']
 
     print("✓ Teste de parsing básico passou")
