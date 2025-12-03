@@ -46,6 +46,7 @@ export default function PasteInput({
             value={groupName || ''}
             onChange={(e) => onGroupNameChange(e.target.value)}
             disabled={loading}
+            placeholder="Amigo Secreto - Empresa XYZ"
           />
         </div>
         <div>
@@ -55,8 +56,9 @@ export default function PasteInput({
             type="text"
             value={defaultCC}
             onChange={(e) => onDefaultCCChange(e.target.value)}
-            style={{ width: '80px' }}
             disabled={loading}
+            placeholder="55"
+            style={{ maxWidth: '120px' }}
           />
         </div>
       </div>
@@ -64,8 +66,8 @@ export default function PasteInput({
       <button onClick={handleParse} disabled={loading || !text.trim()}>
         {loading ? 'Parseando...' : 'Parsear'}
       </button>
-      <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
-        Dica: Ctrl+Enter para parsear
+      <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '10px' }}>
+        💡 Dica: Ctrl+Enter para parsear
       </p>
     </div>
   )

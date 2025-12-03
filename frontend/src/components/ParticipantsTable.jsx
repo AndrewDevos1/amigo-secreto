@@ -14,59 +14,61 @@ export default function ParticipantsTable({
     <div>
       <h2>Participantes ({participants.length})</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Normalizado</th>
-            <th>Válido</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {participants.map((p, idx) => (
-            <tr key={p.id} className={!p.is_phone_valid ? 'invalid' : ''}>
-              <td>{idx + 1}</td>
-              <td>
-                <input
-                  type="text"
-                  value={p.name}
-                  onChange={(e) =>
-                    onUpdateParticipant(p.id, 'name', e.target.value)
-                  }
-                  style={{ width: '100%' }}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={p.phone_raw}
-                  onChange={(e) =>
-                    onUpdateParticipant(p.id, 'phone_raw', e.target.value)
-                  }
-                  style={{ width: '100%' }}
-                />
-              </td>
-              <td>
-                <small>{p.phone_digits}</small>
-              </td>
-              <td>
-                {p.is_phone_valid ? '✅' : '❌'}
-              </td>
-              <td>
-                <button
-                  onClick={() => onRemoveParticipant(p.id)}
-                  style={{ background: '#dc3545' }}
-                >
-                  ✖
-                </button>
-              </td>
+      <div className="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Normalizado</th>
+              <th>Válido</th>
+              <th>Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {participants.map((p, idx) => (
+              <tr key={p.id} className={!p.is_phone_valid ? 'invalid' : ''}>
+                <td>{idx + 1}</td>
+                <td>
+                  <input
+                    type="text"
+                    value={p.name}
+                    onChange={(e) =>
+                      onUpdateParticipant(p.id, 'name', e.target.value)
+                    }
+                    style={{ width: '100%', minWidth: '120px' }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={p.phone_raw}
+                    onChange={(e) =>
+                      onUpdateParticipant(p.id, 'phone_raw', e.target.value)
+                    }
+                    style={{ width: '100%', minWidth: '120px' }}
+                  />
+                </td>
+                <td>
+                  <small>{p.phone_digits}</small>
+                </td>
+                <td>
+                  {p.is_phone_valid ? '✅' : '❌'}
+                </td>
+                <td>
+                  <button
+                    onClick={() => onRemoveParticipant(p.id)}
+                    style={{ background: '#dc3545' }}
+                  >
+                    ✖
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div className="row">
         <button onClick={onGenerate} disabled={!canGenerate || loading}>

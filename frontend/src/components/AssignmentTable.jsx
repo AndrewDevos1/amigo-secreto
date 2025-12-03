@@ -66,66 +66,67 @@ export default function AssignmentTable({ pairs, groupName }) {
           value={messageTemplate}
           onChange={(e) => setMessageTemplate(e.target.value)}
           rows={3}
-          style={{ width: '100%' }}
         />
-        <p style={{ fontSize: '12px', color: '#666' }}>
+        <p style={{ fontSize: '0.85rem', color: '#666' }}>
           Use: {'{giver_name}'}, {'{receiver_name}'}, {'{group_name}'}, {'{receiver_phone}'}
         </p>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Quem envia</th>
-            <th>Telefone</th>
-            <th>Recebe</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pairs.map((pair, idx) => (
-            <tr key={idx}>
-              <td>{idx + 1}</td>
-              <td>{pair.giver.name}</td>
-              <td>
-                <small>{pair.giver.phone_raw}</small>
-              </td>
-              <td>{pair.receiver.name}</td>
-              <td>
-                <button
-                  onClick={() =>
-                    handleSendIndividual(
-                      pair.giver.phone_digits,
-                      pair.giver.name,
-                      pair.receiver.name,
-                      pair.receiver.phone_digits,
-                      pair.receiver.phone_raw
-                    )
-                  }
-                  style={{ background: '#25d366', marginRight: '5px' }}
-                >
-                  WhatsApp
-                </button>
-                <button
-                  onClick={() =>
-                    handleCopyMessage(
-                      pair.giver.name,
-                      pair.receiver.name,
-                      pair.receiver.phone_raw
-                    )
-                  }
-                  style={{ background: '#6c757d' }}
-                >
-                  Copiar
-                </button>
-              </td>
+      <div className="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Quem envia</th>
+              <th>Telefone</th>
+              <th>Recebe</th>
+              <th>Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {pairs.map((pair, idx) => (
+              <tr key={idx}>
+                <td>{idx + 1}</td>
+                <td>{pair.giver.name}</td>
+                <td>
+                  <small>{pair.giver.phone_raw}</small>
+                </td>
+                <td>{pair.receiver.name}</td>
+                <td>
+                  <button
+                    onClick={() =>
+                      handleSendIndividual(
+                        pair.giver.phone_digits,
+                        pair.giver.name,
+                        pair.receiver.name,
+                        pair.receiver.phone_digits,
+                        pair.receiver.phone_raw
+                      )
+                    }
+                    style={{ background: '#25d366', marginRight: '5px' }}
+                  >
+                    WhatsApp
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleCopyMessage(
+                        pair.giver.name,
+                        pair.receiver.name,
+                        pair.receiver.phone_raw
+                      )
+                    }
+                    style={{ background: '#6c757d' }}
+                  >
+                    Copiar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
+      <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '10px' }}>
         <strong>Nota:</strong> O botão WhatsApp abre o chat do GIVER (quem recebe a mensagem com quem tirou).
         Recomenda-se enviar individualmente para evitar bloqueio de popups.
       </p>
